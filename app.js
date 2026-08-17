@@ -34,26 +34,18 @@ let flashes = [];
 
 
 // ============================================================
-// PLAYER
+// PLAYERS
 // ============================================================
 
 function makePlayer(side) {
   return {
     side,
-
     hands: [],
-
     energy: 0,
-
     charging: false,
-
     shield: false,
-
     chargePoint: null,
-
     lastAttack: 0,
-
-    // Smooth tracking
     smoothPoint: null
   };
 }
@@ -122,7 +114,7 @@ async function setup() {
 
 
 // ============================================================
-// START CAMERA
+// START
 // ============================================================
 
 async function start() {
@@ -135,11 +127,9 @@ async function start() {
     await setup();
 
     if (!navigator.mediaDevices?.getUserMedia) {
-
       throw new Error(
         'Camera requires HTTPS. Open the GitHub Pages URL.'
       );
-
     }
 
     startBtn.textContent =
@@ -223,8 +213,6 @@ window.onresize = resize;
 
 // ============================================================
 // HAND CENTER
-// IMPORTANT:
-// NO X FLIP HERE
 // ============================================================
 
 function center(h) {
@@ -240,18 +228,15 @@ function center(h) {
   }
 
   return {
-
     x: x / h.length,
-
     y: y / h.length
-
   };
 
 }
 
 
 // ============================================================
-// PALM OPEN DETECTION
+// OPEN PALM
 // ============================================================
 
 function openPalm(h) {
@@ -278,7 +263,7 @@ function openPalm(h) {
 
 
 // ============================================================
-// CLASSIFY HANDS
+// CLASSIFY
 // ============================================================
 
 function classify(result) {
@@ -288,10 +273,6 @@ function classify(result) {
 
   const landmarks =
     result?.landmarks || [];
-
-  const handedness =
-    result?.handednesses || [];
-
 
   for (
     let i = 0;
@@ -305,31 +286,16 @@ function classify(result) {
 
     const open = openPalm(h);
 
-    const label =
-      handedness[i]?.[0]?.categoryName
-        ?.toLowerCase() || '';
-
-
     const hand = {
-
       center: c,
-
       open,
-
-      label,
-
       landmarks: h
-
     };
 
 
     /*
-     * IMPORTANT
-     *
-     * The camera is displayed as a mirror.
-     *
-     * Therefore we assign players based on
-     * the visual screen position.
+     * Player assignment is based on
+     * the visible screen position.
      */
 
     const player =
@@ -341,29 +307,6 @@ function classify(result) {
     player.hands.push(hand);
 
   }
-
-
-  /*
-   * Sort hands consistently
-   */
-
-  players.forEach(player => {
-
-    player.hands.sort(
-      (a, b) => {
-
-        if (a.label === 'left')
-          return -1;
-
-        if (b.label === 'left')
-          return 1;
-
-        return 0;
-
-      }
-    );
-
-  });
 
 }
 
@@ -385,19 +328,16 @@ function chargePoint(player) {
     player.hands[1].center;
 
 
-  const x =
-    ((a.x + b.x) / 2) *
-    canvas.width;
-
-
-  const y =
-    ((a.y + b.y) / 2) *
-    canvas.height;
-
-
   return {
-    x,
-    y
+
+    x:
+      ((a.x + b.x) / 2) *
+      canvas.width,
+
+    y:
+      ((a.y + b.y) / 2) *
+      canvas.height
+
   };
 
 }
@@ -415,15 +355,18 @@ function particlesAt(
   speed = 300
 ) {
 
-  for (let i = 0; i < n; i++) {
+  for (
+    let i = 0;
+    i < n;
+    i++
+  ) {
 
-    const a =
+    const angle =
       Math.random() *
       Math.PI *
       2;
 
-
-    const s =
+    const velocity =
       speed *
       (0.3 + Math.random());
 
@@ -434,18 +377,22 @@ function particlesAt(
       y,
 
       vx:
-        Math.cos(a) * s,
+        Math.cos(angle) *
+        velocity,
 
       vy:
-        Math.sin(a) * s,
+        Math.sin(angle) *
+        velocity,
 
       life:
         0.3 +
-        Math.random() * 0.7,
+        Math.random() *
+        0.7,
 
       size:
         2 +
-        Math.random() * 5,
+        Math.random() *
+        5,
 
       side
 
@@ -491,12 +438,13 @@ function blast(player, point) {
 
   flashes.push(0.35);
 
-
   player.energy = 0;
 
   player.charging = false;
 
   player.chargePoint = null;
+
+  player.smoothPoint = null;
 
   player.lastAttack =
     performance.now();
@@ -505,7 +453,7 @@ function blast(player, point) {
 
 
 // ============================================================
-// PLAYER UPDATE
+// UPDATE PLAYER
 // ============================================================
 
 function updatePlayer(
@@ -520,9 +468,7 @@ function updatePlayer(
     performance.now();
 
 
-  /*
-   * SHIELD
-   */
+  // Shield
 
   player.shield =
     player.hands.length === 1 &&
@@ -530,9 +476,7 @@ function updatePlayer(
     now - player.lastAttack > 700;
 
 
-  /*
-   * CHARGING
-   */
+  // Charging
 
   if (
     cp &&
@@ -542,9 +486,7 @@ function updatePlayer(
     player.charging = true;
 
 
-    /*
-     * Smooth charge position
-     */
+    // Smooth movement
 
     if (!player.smoothPoint) {
 
@@ -580,9 +522,7 @@ function updatePlayer(
       clamp(
         player.energy +
         dt * 38,
-
         0,
-
         100
       );
 
@@ -616,9 +556,7 @@ function updatePlayer(
   }
 
 
-  /*
-   * STATUS
-   */
+  // Status
 
   statusEls[player.side].textContent =
 
@@ -700,14 +638,14 @@ function updateProjectiles(dt) {
       projectiles[i];
 
 
-    const dir =
+    const direction =
       Math.sign(
         q.target - q.x
       );
 
 
     q.x +=
-      dir *
+      direction *
       (360 + q.r * 3) *
       dt;
 
@@ -726,7 +664,7 @@ function updateProjectiles(dt) {
       ];
 
 
-    const tx =
+    const targetX =
       q.owner
         ? canvas.width * 0.82
         : canvas.width * 0.18;
@@ -734,7 +672,9 @@ function updateProjectiles(dt) {
 
     if (
       target.shield &&
-      Math.abs(q.x - tx) < 70
+      Math.abs(
+        q.x - targetX
+      ) < 70
     ) {
 
       impact(
@@ -743,7 +683,10 @@ function updateProjectiles(dt) {
         true
       );
 
-      projectiles.splice(i, 1);
+      projectiles.splice(
+        i,
+        1
+      );
 
       continue;
 
@@ -751,13 +694,17 @@ function updateProjectiles(dt) {
 
 
     if (
-      (dir > 0 && q.x > tx) ||
-      (dir < 0 && q.x < tx) ||
+      (direction > 0 &&
+        q.x > targetX) ||
+
+      (direction < 0 &&
+        q.x < targetX) ||
+
       q.life > 3
     ) {
 
       impact(
-        tx,
+        targetX,
         canvas.height * 0.5,
         false
       );
@@ -774,7 +721,10 @@ function updateProjectiles(dt) {
       }
 
 
-      projectiles.splice(i, 1);
+      projectiles.splice(
+        i,
+        1
+      );
 
     }
 
@@ -839,20 +789,30 @@ function drawLightning(
   ctx.globalAlpha = 0.8;
 
 
-  for (let k = 0; k < 3; k++) {
+  for (
+    let k = 0;
+    k < 3;
+    k++
+  ) {
 
-    ctx.beginPath();
+    const angle =
+      seed +
+      k *
+      Math.PI *
+      2 /
+      3;
+
 
     let px = x;
     let py = y;
 
 
-    const angle =
-      seed +
-      k * Math.PI * 2 / 3;
+    ctx.beginPath();
 
-
-    ctx.moveTo(px, py);
+    ctx.moveTo(
+      px,
+      py
+    );
 
 
     for (
@@ -861,7 +821,7 @@ function drawLightning(
       i++
     ) {
 
-      const r =
+      const radiusStep =
         radius *
         (0.3 + i / 7);
 
@@ -874,14 +834,14 @@ function drawLightning(
       px =
         x +
         Math.cos(angle) *
-        r +
+        radiusStep +
         jitter;
 
 
       py =
         y +
         Math.sin(angle) *
-        r +
+        radiusStep +
         jitter;
 
 
@@ -891,6 +851,7 @@ function drawLightning(
       );
 
     }
+
 
     ctx.stroke();
 
@@ -903,7 +864,7 @@ function drawLightning(
 
 
 // ============================================================
-// CHARGE VFX
+// CHARGE EFFECT
 // ============================================================
 
 function drawChargeEffect(
@@ -942,11 +903,15 @@ function drawChargeEffect(
 
 
   const pulse =
-    Math.sin(time * 0.006) * 0.5 + 0.5;
+    Math.sin(
+      time * 0.006
+    ) *
+    0.5 +
+    0.5;
 
 
   // ==========================================================
-  // OUTER AURA
+  // AURA
   // ==========================================================
 
   const auraRadius =
@@ -1008,7 +973,7 @@ function drawChargeEffect(
 
 
   // ==========================================================
-  // ENERGY CORE
+  // CORE
   // ==========================================================
 
   const coreRadius =
@@ -1070,7 +1035,7 @@ function drawChargeEffect(
 
 
   // ==========================================================
-  // ROTATING ENERGY RINGS
+  // ENERGY RINGS
   // ==========================================================
 
   ctx.save();
@@ -1103,18 +1068,30 @@ function drawChargeEffect(
       i * 0.12;
 
 
+    const direction =
+      i % 2
+        ? -1
+        : 1;
+
+
     ctx.beginPath();
 
     ctx.arc(
       x,
       y,
       radius,
-      time * 0.002 * (i % 2 ? -1 : 1) +
-        i,
 
-      time * 0.002 * (i % 2 ? -1 : 1) +
-        i +
-        Math.PI * 1.35
+      time *
+      0.002 *
+      direction +
+      i,
+
+      time *
+      0.002 *
+      direction +
+      i +
+      Math.PI *
+      1.35
     );
 
 
@@ -1133,14 +1110,19 @@ function drawChargeEffect(
   drawLightning(
     x,
     y,
-    80 + energy * 50,
+    80 +
+      energy *
+      50,
+
     brightColor,
-    time * 0.004
+
+    time *
+      0.004
   );
 
 
   // ==========================================================
-  // ENERGY PARTICLES
+  // PARTICLES
   // ==========================================================
 
   for (
@@ -1150,16 +1132,27 @@ function drawChargeEffect(
   ) {
 
     const angle =
-      time * 0.0015 +
-      i * Math.PI * 2 / 18;
+      time *
+      0.0015 +
+
+      i *
+      Math.PI *
+      2 /
+      18;
 
 
     const radius =
       45 +
+
       Math.sin(
-        time * 0.003 + i
-      ) * 18 +
-      energy * 55;
+        time *
+        0.003 +
+        i
+      ) *
+      18 +
+
+      energy *
+      55;
 
 
     const px =
@@ -1189,7 +1182,10 @@ function drawChargeEffect(
     ctx.arc(
       px,
       py,
-      2 + energy * 3,
+      2 +
+        energy *
+        3,
+
       0,
       Math.PI * 2
     );
@@ -1211,7 +1207,8 @@ function drawChargeEffect(
     ctx.save();
 
     ctx.globalAlpha =
-      (energy - 0.75) * 2;
+      (energy - 0.75) *
+      2;
 
 
     ctx.strokeStyle =
@@ -1240,13 +1237,19 @@ function drawChargeEffect(
 
       const r1 =
         55 +
-        Math.sin(time * 0.005 + i) * 8;
+        Math.sin(
+          time *
+          0.005 +
+          i
+        ) *
+        8;
 
 
       const r2 =
         r1 +
         25 +
-        energy * 30;
+        energy *
+        30;
 
 
       ctx.beginPath();
@@ -1299,33 +1302,15 @@ function draw() {
   );
 
 
-  /*
-   * IMPORTANT
-   *
-   * Mirror the canvas so the effect follows
-   * the user's visual camera position.
-   */
-
-  ctx.save();
-
-  ctx.translate(
-    canvas.width,
-    0
-  );
-
-  ctx.scale(
-    -1,
-    1
-  );
-
-
   // ==========================================================
   // HAND MARKERS
   // ==========================================================
 
   players.forEach(player => {
 
-    for (const hand of player.hands) {
+    for (
+      const hand of player.hands
+    ) {
 
       const x =
         hand.center.x *
@@ -1342,8 +1327,6 @@ function draw() {
           ? '#ff5a73'
           : '#5d7cff';
 
-
-      // Glow ring
 
       ctx.strokeStyle =
         color;
@@ -1372,7 +1355,7 @@ function draw() {
       ctx.shadowBlur = 0;
 
 
-      // Center point
+      // Center dot
 
       ctx.fillStyle =
         '#ffffff';
@@ -1389,44 +1372,6 @@ function draw() {
       );
 
       ctx.fill();
-
-
-      // Label
-
-      ctx.save();
-
-      ctx.scale(
-        -1,
-        1
-      );
-
-
-      ctx.font =
-        'bold 14px Arial';
-
-      ctx.fillStyle =
-        color;
-
-      ctx.textAlign =
-        'center';
-
-
-      ctx.fillText(
-
-        hand.label === 'left'
-          ? 'LEFT'
-          : hand.label === 'right'
-            ? 'RIGHT'
-            : 'HAND',
-
-        -x,
-
-        y - 42
-
-      );
-
-
-      ctx.restore();
 
     }
 
@@ -1490,7 +1435,7 @@ function draw() {
 
 
     // ========================================================
-    // CHARGE
+    // CHARGE VFX
     // ========================================================
 
     drawChargeEffect(
@@ -1520,6 +1465,7 @@ function draw() {
         q.x,
         canvas.height * 0.5,
         1,
+
         q.x,
         canvas.height * 0.5,
         q.r * 2
@@ -1687,9 +1633,6 @@ function draw() {
 
   }
 
-
-  ctx.restore();
-
 }
 
 
@@ -1706,7 +1649,9 @@ function loop(ts) {
   const dt =
     Math.min(
       0.033,
-      (ts - lastTs) / 1000 || 0.016
+      (ts - lastTs) /
+        1000 ||
+      0.016
     );
 
 
@@ -1739,17 +1684,14 @@ function loop(ts) {
     dt
   );
 
-
   updatePlayer(
     players[1],
     dt
   );
 
-
   updateProjectiles(
     dt
   );
-
 
   draw();
 
