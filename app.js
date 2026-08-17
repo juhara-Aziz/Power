@@ -40,7 +40,11 @@ async function start(){
 }
 startBtn.onclick=start;document.querySelector('#restartBtn').onclick=()=>location.reload();
 function resize(){canvas.width=video.videoWidth||1280;canvas.height=video.videoHeight||720}window.onresize=resize;
-function center(h){let x=0,y=0;for(const p of h){x+=p.x;y+=p.y}return{x:1-x/h.length,y:y/h.length}}
+function center(h)
+{let x=0,y=0;for(const p of h){x+=p.x;y+=p.y}
+ return{
+   x:x/h.length,
+   y:y/h.length}}
 function openPalm(h){const w=h[0],tips=[8,12,16,20];return tips.filter(i=>Math.hypot(h[i].x-w.x,h[i].y-w.y)>.18).length>=3}
 function classify(r) {
   players[0].hands = [];
