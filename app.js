@@ -3,7 +3,17 @@ const startBtn=document.querySelector('#startBtn'),startPanel=document.querySele
 const scoreEls=[document.querySelector('#score1'),document.querySelector('#score2')],statusEls=[document.querySelector('#status1'),document.querySelector('#status2')];
 let HandLandmarker,FilesetResolver,landmarker,stream,running=false,lastVideoTime=-1,lastTs=0,scores=[0,0],projectiles=[],particles=[],flashes=[];
 const players=[makePlayer(0),makePlayer(1)];
-function makePlayer(side){return{side,hands:[],energy:0,charging:false,shield:false,chargePoint:null,lastAttack:0}}
+function makePlayer(side){
+  return {
+    side,
+    hands: [],
+    energy: 0,
+    charging: false,
+    shield: false,
+    chargePoint: null,
+    lastAttack: 0
+  }
+}
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),lerp=(a,b,t)=>a+(b-a)*t;
 
 async function setup(){
