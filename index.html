@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>KI BATTLE — 2 Player</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="app">
+    <header class="hud">
+      <section class="player-card p1">
+        <span class="label">PLAYER 1</span>
+        <strong id="score1">0</strong>
+        <span id="status1">READY</span>
+      </section>
+      <div class="center-hud">
+        <div class="title">KI BATTLE</div>
+        <div class="round">FIRST TO 5</div>
+      </div>
+      <section class="player-card p2">
+        <span class="label">PLAYER 2</span>
+        <strong id="score2">0</strong>
+        <span id="status2">READY</span>
+      </section>
+    </header>
+
+    <section class="arena">
+      <video id="video" autoplay muted playsinline></video>
+      <canvas id="fx"></canvas>
+      <div class="center-line"></div>
+      <div id="startPanel" class="overlay">
+        <h1>KI BATTLE</h1>
+        <p>Allow camera access, then use your hands to fight.</p>
+        <button id="startBtn">START CAMERA</button>
+        <small>2 hands = charge &nbsp; • &nbsp; 1 open hand = shield</small>
+      </div>
+      <div id="winnerPanel" class="overlay hidden">
+        <h1 id="winnerText">PLAYER 1 WINS</h1>
+        <button id="restartBtn">REMATCH</button>
+      </div>
+    </section>
+
+    <footer class="controls">
+      <span>🤲 CHARGE</span>
+      <span>✋ SHIELD</span>
+      <span>⚡ BLAST</span>
+      <span>ESC RESET</span>
+    </footer>
+  </main>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
