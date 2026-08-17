@@ -7,6 +7,7 @@
 <title>KI BATTLE</title>
 
 <style>
+
 *{
   box-sizing:border-box;
   margin:0;
@@ -25,22 +26,38 @@ body{
   color:white;
 }
 
+/* =========================================================
+   GAME
+========================================================= */
+
 #game{
   position:relative;
   width:100vw;
   height:100vh;
   overflow:hidden;
+
   background:
-    radial-gradient(circle at 50% 45%,#111936 0%,#050816 40%,#010207 100%);
+    radial-gradient(
+      circle at 50% 45%,
+      #111936 0%,
+      #050816 40%,
+      #010207 100%
+    );
 }
+
+/* CAMERA */
 
 #camera{
   position:absolute;
   inset:0;
+
   width:100%;
   height:100%;
+
   object-fit:cover;
+
   transform:scaleX(-1);
+
   filter:
     brightness(.72)
     contrast(1.12)
@@ -50,7 +67,9 @@ body{
 #cameraShade{
   position:absolute;
   inset:0;
+
   pointer-events:none;
+
   background:
     radial-gradient(
       ellipse at center,
@@ -63,25 +82,34 @@ body{
 #fx{
   position:absolute;
   inset:0;
+
   width:100%;
   height:100%;
+
   pointer-events:none;
 }
 
-/* =========================
-   TOP UI
-========================= */
+/* =========================================================
+   TOP PLAYER UI
+========================================================= */
 
 #topUI{
+
   position:absolute;
-  top:18px;
+
+  top:16px;
   left:50%;
+
   transform:translateX(-50%);
-  width:min(1050px,94vw);
+
+  width:min(1100px,94vw);
+
   display:flex;
-  align-items:center;
+  align-items:flex-start;
   justify-content:space-between;
+
   z-index:20;
+
   pointer-events:none;
 }
 
@@ -89,15 +117,29 @@ body{
   width:38%;
 }
 
+/* NAME */
+
 .playerName{
+
   display:flex;
   align-items:center;
-  gap:10px;
-  font-weight:900;
-  font-size:14px;
-  letter-spacing:3px;
+
+  font-weight:1000;
+
+  font-size:15px;
+
+  letter-spacing:2px;
+
   margin-bottom:7px;
-  text-shadow:0 0 12px currentColor;
+
+  text-shadow:
+    0 0 12px currentColor;
+
+  text-transform:uppercase;
+
+  max-width:100%;
+
+  overflow:hidden;
 }
 
 .p1Name{
@@ -106,62 +148,151 @@ body{
 
 .p2Name{
   color:#ff4268;
+
   justify-content:flex-end;
 }
 
+/* HEALTH */
+
 .health{
+
   height:14px;
-  background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.25);
+
+  background:
+    rgba(255,255,255,.08);
+
+  border:
+    1px solid rgba(255,255,255,.25);
+
   border-radius:20px;
+
   overflow:hidden;
+
   box-shadow:
     inset 0 0 10px rgba(0,0,0,.7),
     0 0 15px rgba(0,0,0,.3);
 }
 
 .healthBar{
+
   height:100%;
+
   width:100%;
-  transition:width .2s ease;
+
+  transition:
+    width .2s ease;
 }
 
 #p1Health{
-  background:linear-gradient(90deg,#087dff,#57e8ff);
-  box-shadow:0 0 18px #08aaff;
+
+  background:
+    linear-gradient(
+      90deg,
+      #087dff,
+      #57e8ff
+    );
+
+  box-shadow:
+    0 0 18px #08aaff;
 }
 
 #p2Health{
+
   margin-left:auto;
-  background:linear-gradient(90deg,#ff214e,#ff8b66);
-  box-shadow:0 0 18px #ff3158;
+
+  background:
+    linear-gradient(
+      90deg,
+      #ff214e,
+      #ff8b66
+    );
+
+  box-shadow:
+    0 0 18px #ff3158;
 }
 
-#vs{
-  width:70px;
+/* =========================================================
+   CENTER SCORE
+========================================================= */
+
+#centerScore{
+
+  width:130px;
+
   text-align:center;
-  font-size:22px;
-  font-weight:1000;
-  font-style:italic;
-  color:#fff;
-  text-shadow:
-    0 0 8px #fff,
-    0 0 20px #9e8cff;
+
+  margin-top:-2px;
 }
 
-/* =========================
-   ENERGY BARS
-========================= */
+.score{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:10px;
+
+  font-size:25px;
+
+  font-weight:1000;
+
+  font-style:italic;
+
+  text-shadow:
+    0 0 10px #fff;
+}
+
+#p1Score{
+  color:#38d8ff;
+}
+
+#p2Score{
+  color:#ff4b70;
+}
+
+.scoreDash{
+  color:rgba(255,255,255,.5);
+  font-size:18px;
+}
+
+#roundText{
+
+  margin-top:5px;
+
+  font-size:9px;
+
+  letter-spacing:3px;
+
+  color:
+    rgba(255,255,255,.55);
+
+  text-transform:uppercase;
+}
+
+/* =========================================================
+   ENERGY UI
+========================================================= */
 
 #energyUI{
+
   position:absolute;
-  top:62px;
+
+  top:72px;
+
   left:50%;
+
   transform:translateX(-50%);
-  width:min(1050px,94vw);
+
+  width:min(1100px,94vw);
+
   display:flex;
+
   justify-content:space-between;
+
   z-index:20;
+
   pointer-events:none;
 }
 
@@ -170,55 +301,77 @@ body{
 }
 
 .energyLabel{
+
   font-size:8px;
+
   letter-spacing:2px;
+
   margin-bottom:4px;
+
   opacity:.65;
 }
 
 .energyTrack{
+
   height:7px;
+
   border-radius:20px;
+
   overflow:hidden;
-  background:rgba(255,255,255,.07);
-  border:1px solid rgba(255,255,255,.12);
+
+  background:
+    rgba(255,255,255,.07);
+
+  border:
+    1px solid rgba(255,255,255,.12);
 }
 
 .energyFill{
+
   height:100%;
+
   width:0%;
-  transition:width .08s linear;
+
+  transition:
+    width .08s linear;
 }
 
 #p1Energy{
-  background:linear-gradient(
-    90deg,
-    #008cff,
-    #49eaff,
-    white
-  );
+
+  background:
+    linear-gradient(
+      90deg,
+      #008cff,
+      #49eaff,
+      white
+    );
 
   box-shadow:
     0 0 12px #00cfff;
 }
 
 #p2Energy{
+
   margin-left:auto;
 
-  background:linear-gradient(
-    90deg,
-    #ff214e,
-    #ff7566,
-    white
-  );
+  background:
+    linear-gradient(
+      90deg,
+      #ff214e,
+      #ff7566,
+      white
+    );
 
   box-shadow:
     0 0 12px #ff3158;
 }
 
 .energyText{
+
   font-size:8px;
+
   margin-top:3px;
+
   opacity:.5;
 }
 
@@ -226,95 +379,142 @@ body{
   text-align:right;
 }
 
-/* =========================
+/* =========================================================
    STATUS
-========================= */
+========================================================= */
 
 #status{
+
   position:absolute;
+
   left:50%;
-  top:100px;
+
+  top:111px;
+
   transform:translateX(-50%);
+
   z-index:20;
 
-  padding:8px 18px;
-  border:1px solid rgba(255,255,255,.16);
+  padding:
+    7px 17px;
+
+  border:
+    1px solid rgba(255,255,255,.16);
+
   border-radius:30px;
 
-  background:rgba(0,0,0,.38);
-  backdrop-filter:blur(12px);
+  background:
+    rgba(0,0,0,.38);
 
-  font-size:11px;
+  backdrop-filter:
+    blur(12px);
+
+  font-size:10px;
+
   letter-spacing:2px;
+
   text-transform:uppercase;
 
-  color:rgba(255,255,255,.72);
+  color:
+    rgba(255,255,255,.72);
+
+  white-space:nowrap;
 }
 
-/* =========================
+/* =========================================================
    BOTTOM
-========================= */
+========================================================= */
 
 #bottomUI{
+
   position:absolute;
+
   left:50%;
-  bottom:22px;
+  bottom:20px;
+
   transform:translateX(-50%);
+
   z-index:20;
 
-  width:min(600px,90vw);
+  width:min(650px,90vw);
 
   display:flex;
+
   flex-direction:column;
+
   align-items:center;
+
   gap:9px;
 
   pointer-events:none;
 }
 
 #instruction{
-  padding:9px 18px;
+
+  padding:
+    9px 18px;
+
   border-radius:20px;
 
-  background:rgba(0,0,0,.42);
-  border:1px solid rgba(255,255,255,.12);
+  background:
+    rgba(0,0,0,.42);
 
-  backdrop-filter:blur(10px);
+  border:
+    1px solid rgba(255,255,255,.12);
 
-  color:rgba(255,255,255,.75);
-  font-size:11px;
-  letter-spacing:1.3px;
+  backdrop-filter:
+    blur(10px);
+
+  color:
+    rgba(255,255,255,.75);
+
+  font-size:10px;
+
+  letter-spacing:1.2px;
+
   text-align:center;
 }
 
-/* =========================
-   START
-========================= */
+/* =========================================================
+   START SCREEN
+========================================================= */
 
 #startScreen{
+
   position:absolute;
+
   inset:0;
+
   z-index:100;
 
   display:flex;
+
   flex-direction:column;
+
   align-items:center;
+
   justify-content:center;
 
   background:
     radial-gradient(
       circle at center,
       rgba(26,37,86,.72),
-      rgba(0,0,0,.95)
+      rgba(0,0,0,.96)
     );
 
-  backdrop-filter:blur(8px);
+  backdrop-filter:
+    blur(8px);
 }
 
 .logo{
-  font-size:clamp(55px,10vw,120px);
+
+  font-size:
+    clamp(55px,10vw,120px);
+
   font-weight:1000;
+
   font-style:italic;
+
   letter-spacing:-5px;
 
   color:white;
@@ -327,28 +527,107 @@ body{
 }
 
 .subtitle{
+
   margin-top:-5px;
+
   font-size:12px;
+
   letter-spacing:7px;
-  color:rgba(255,255,255,.58);
+
+  color:
+    rgba(255,255,255,.58);
+}
+
+/* NAME FORM */
+
+#nameForm{
+
+  margin-top:32px;
+
+  display:flex;
+
+  gap:15px;
+
+  width:min(600px,90vw);
+}
+
+.nameInput{
+
+  flex:1;
+
+  min-width:0;
+
+  padding:
+    14px 18px;
+
+  border-radius:14px;
+
+  border:
+    1px solid rgba(255,255,255,.2);
+
+  outline:none;
+
+  background:
+    rgba(255,255,255,.07);
+
+  color:white;
+
+  font-size:14px;
+
+  font-weight:700;
+
+  letter-spacing:1px;
+
+  text-align:center;
+
+  backdrop-filter:
+    blur(10px);
+
+  transition:.2s;
+}
+
+.nameInput::placeholder{
+  color:rgba(255,255,255,.4);
+}
+
+#p1NameInput:focus{
+
+  border-color:#28cfff;
+
+  box-shadow:
+    0 0 20px rgba(20,200,255,.25);
+}
+
+#p2NameInput:focus{
+
+  border-color:#ff4268;
+
+  box-shadow:
+    0 0 20px rgba(255,40,90,.25);
 }
 
 #startButton{
-  margin-top:40px;
 
-  padding:15px 42px;
+  margin-top:25px;
+
+  padding:
+    15px 42px;
 
   border:none;
+
   border-radius:30px;
 
-  background:linear-gradient(
-    90deg,
-    #0b8cff,
-    #46e8ff
-  );
+  background:
+    linear-gradient(
+      90deg,
+      #0b8cff,
+      #46e8ff
+    );
 
   color:white;
+
   font-weight:900;
+
   letter-spacing:3px;
 
   cursor:pointer;
@@ -356,96 +635,233 @@ body{
   box-shadow:
     0 0 18px rgba(40,190,255,.7),
     0 0 50px rgba(40,150,255,.3);
+
+  transition:.2s;
+}
+
+#startButton:hover{
+
+  transform:scale(1.06);
+
+  box-shadow:
+    0 0 25px rgba(40,220,255,.9),
+    0 0 70px rgba(40,150,255,.5);
 }
 
 #loading{
+
   margin-top:18px;
+
   font-size:11px;
-  color:rgba(255,255,255,.45);
+
+  color:
+    rgba(255,255,255,.45);
+
   letter-spacing:2px;
 }
 
-/* =========================
-   WINNER
-========================= */
+/* =========================================================
+   ROUND MESSAGE
+========================================================= */
 
-#winner{
+#roundMessage{
+
   display:none;
 
   position:absolute;
+
   inset:0;
+
+  z-index:60;
+
+  align-items:center;
+
+  justify-content:center;
+
+  flex-direction:column;
+
+  background:
+    rgba(0,0,0,.38);
+
+  pointer-events:none;
+}
+
+#roundMessageTitle{
+
+  font-size:
+    clamp(42px,8vw,90px);
+
+  font-weight:1000;
+
+  font-style:italic;
+
+  text-shadow:
+    0 0 15px white,
+    0 0 40px #39cfff;
+}
+
+#roundMessageSub{
+
+  margin-top:10px;
+
+  font-size:13px;
+
+  letter-spacing:4px;
+
+  color:
+    rgba(255,255,255,.65);
+}
+
+/* =========================================================
+   FINAL WINNER
+========================================================= */
+
+#winner{
+
+  display:none;
+
+  position:absolute;
+
+  inset:0;
+
   z-index:80;
 
   align-items:center;
+
   justify-content:center;
+
   flex-direction:column;
 
-  background:rgba(0,0,0,.62);
-  backdrop-filter:blur(7px);
+  background:
+    rgba(0,0,0,.72);
+
+  backdrop-filter:
+    blur(9px);
 }
 
 #winnerTitle{
-  font-size:clamp(45px,8vw,100px);
+
+  font-size:
+    clamp(45px,8vw,100px);
+
   font-weight:1000;
+
   font-style:italic;
 }
 
 #winnerSub{
+
   margin-top:10px;
-  color:rgba(255,255,255,.65);
+
+  color:
+    rgba(255,255,255,.65);
+
+  letter-spacing:4px;
+}
+
+#finalScore{
+
+  margin-top:15px;
+
+  font-size:28px;
+
+  font-weight:1000;
+
   letter-spacing:4px;
 }
 
 #restartButton{
-  margin-top:30px;
-  padding:12px 30px;
 
-  border:1px solid rgba(255,255,255,.3);
+  margin-top:30px;
+
+  padding:
+    12px 30px;
+
+  border:
+    1px solid rgba(255,255,255,.3);
+
   border-radius:30px;
 
-  background:rgba(255,255,255,.08);
+  background:
+    rgba(255,255,255,.08);
+
   color:white;
 
   cursor:pointer;
 }
 
+/* =========================================================
+   MOBILE
+========================================================= */
+
 @media(max-width:700px){
 
   #topUI,
   #energyUI{
+
     width:92vw;
   }
 
   .playerUI,
   .energyBox{
+
     width:36%;
   }
 
   .playerName{
+
     font-size:9px;
-    letter-spacing:1.5px;
+
+    letter-spacing:1px;
   }
 
-  #vs{
-    font-size:16px;
-    width:35px;
+  #centerScore{
+
+    width:70px;
+  }
+
+  .score{
+
+    font-size:18px;
+
+    gap:6px;
+  }
+
+  #roundText{
+
+    font-size:7px;
+
+    letter-spacing:2px;
   }
 
   #status{
-    top:92px;
-    font-size:8px;
+
+    top:105px;
+
+    font-size:7px;
   }
 
   #instruction{
-    font-size:9px;
+
+    font-size:8px;
+  }
+
+  #nameForm{
+
+    flex-direction:column;
+
+    width:75vw;
   }
 }
+
 </style>
 </head>
 
 <body>
 
 <div id="game">
+
+<!-- CAMERA -->
 
 <video
   id="camera"
@@ -458,47 +874,93 @@ body{
 
 <canvas id="fx"></canvas>
 
-<!-- ================= TOP ================= -->
+
+<!-- =====================================================
+     TOP UI
+===================================================== -->
 
 <div id="topUI">
 
+  <!-- PLAYER 1 -->
+
   <div class="playerUI">
 
-    <div class="playerName p1Name">
+    <div
+      id="player1Name"
+      class="playerName p1Name">
       PLAYER 1
     </div>
 
     <div class="health">
+
       <div
         id="p1Health"
         class="healthBar">
       </div>
+
     </div>
 
   </div>
 
-  <div id="vs">VS</div>
+
+  <!-- SCORE -->
+
+  <div id="centerScore">
+
+    <div class="score">
+
+      <span id="p1Score">
+        0
+      </span>
+
+      <span class="scoreDash">
+        -
+      </span>
+
+      <span id="p2Score">
+        0
+      </span>
+
+    </div>
+
+    <div id="roundText">
+      ROUND 1
+    </div>
+
+  </div>
+
+
+  <!-- PLAYER 2 -->
 
   <div class="playerUI">
 
-    <div class="playerName p2Name">
+    <div
+      id="player2Name"
+      class="playerName p2Name">
       PLAYER 2
     </div>
 
     <div class="health">
+
       <div
         id="p2Health"
         class="healthBar">
       </div>
+
     </div>
 
   </div>
 
 </div>
 
-<!-- ================= ENERGY ================= -->
+
+<!-- =====================================================
+     ENERGY
+===================================================== -->
 
 <div id="energyUI">
+
+  <!-- P1 ENERGY -->
 
   <div class="energyBox">
 
@@ -507,10 +969,12 @@ body{
     </div>
 
     <div class="energyTrack">
+
       <div
         id="p1Energy"
         class="energyFill">
       </div>
+
     </div>
 
     <div
@@ -521,17 +985,24 @@ body{
 
   </div>
 
+
+  <!-- P2 ENERGY -->
+
   <div class="energyBox">
 
-    <div class="energyLabel" style="text-align:right">
+    <div
+      class="energyLabel"
+      style="text-align:right">
       KI ENERGY
     </div>
 
     <div class="energyTrack">
+
       <div
         id="p2Energy"
         class="energyFill">
       </div>
+
     </div>
 
     <div
@@ -544,21 +1015,28 @@ body{
 
 </div>
 
+
+<!-- STATUS -->
+
 <div id="status">
   CAMERA OFF
 </div>
 
-<!-- ================= BOTTOM ================= -->
+
+<!-- BOTTOM -->
 
 <div id="bottomUI">
 
   <div id="instruction">
-    BRING YOUR HANDS TOGETHER TO CHARGE • OPEN PALM TO SHIELD • RELEASE TO ATTACK
+    TWO HANDS TO CHARGE • OPEN PALM TO SHIELD • RELEASE TO ATTACK
   </div>
 
 </div>
 
-<!-- ================= START ================= -->
+
+<!-- =====================================================
+     START SCREEN
+===================================================== -->
 
 <div id="startScreen">
 
@@ -570,9 +1048,30 @@ body{
     HAND POWER ARENA
   </div>
 
+
+  <div id="nameForm">
+
+    <input
+      id="p1NameInput"
+      class="nameInput"
+      maxlength="14"
+      placeholder="PLAYER 1 NAME"
+      autocomplete="off">
+
+    <input
+      id="p2NameInput"
+      class="nameInput"
+      maxlength="14"
+      placeholder="PLAYER 2 NAME"
+      autocomplete="off">
+
+  </div>
+
+
   <button id="startButton">
     START BATTLE
   </button>
+
 
   <div id="loading">
     READY
@@ -580,25 +1079,54 @@ body{
 
 </div>
 
-<!-- ================= WINNER ================= -->
+
+<!-- =====================================================
+     ROUND MESSAGE
+===================================================== -->
+
+<div id="roundMessage">
+
+  <div id="roundMessageTitle">
+    ROUND 1
+  </div>
+
+  <div id="roundMessageSub">
+    GET READY
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     FINAL WINNER
+===================================================== -->
 
 <div id="winner">
 
   <div id="winnerTitle">
-    PLAYER 1 WINS
+    PLAYER WINS
   </div>
 
   <div id="winnerSub">
-    ENERGY DOMINANCE
+    MATCH VICTORY
+  </div>
+
+  <div id="finalScore">
+    5 - 0
   </div>
 
   <button id="restartButton">
-    PLAY AGAIN
+    NEW MATCH
   </button>
 
 </div>
 
+
 <script type="module">
+
+/* =========================================================
+   MEDIAPIPE
+========================================================= */
 
 import {
   FilesetResolver,
@@ -607,9 +1135,10 @@ import {
 from
 "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.22-rc.20250304";
 
-/* ============================================================
+
+/* =========================================================
    DOM
-============================================================ */
+========================================================= */
 
 const video =
   document.getElementById("camera");
@@ -650,78 +1179,140 @@ const p1EnergyText =
 const p2EnergyText =
   document.getElementById("p2EnergyText");
 
+const player1NameEl =
+  document.getElementById("player1Name");
+
+const player2NameEl =
+  document.getElementById("player2Name");
+
+const p1NameInput =
+  document.getElementById("p1NameInput");
+
+const p2NameInput =
+  document.getElementById("p2NameInput");
+
+const p1ScoreEl =
+  document.getElementById("p1Score");
+
+const p2ScoreEl =
+  document.getElementById("p2Score");
+
+const roundText =
+  document.getElementById("roundText");
+
+const roundMessage =
+  document.getElementById("roundMessage");
+
+const roundMessageTitle =
+  document.getElementById("roundMessageTitle");
+
+const roundMessageSub =
+  document.getElementById("roundMessageSub");
+
 const winner =
   document.getElementById("winner");
 
 const winnerTitle =
   document.getElementById("winnerTitle");
 
+const winnerSub =
+  document.getElementById("winnerSub");
+
+const finalScore =
+  document.getElementById("finalScore");
+
 const restartButton =
   document.getElementById("restartButton");
 
-/* ============================================================
+
+/* =========================================================
    GAME STATE
-============================================================ */
+========================================================= */
 
 let handLandmarker = null;
+
 let stream = null;
+
 let running = false;
+
 let lastVideoTime = -1;
 
+let round = 1;
+
+let matchOver = false;
+
+let player1Name = "PLAYER 1";
+
+let player2Name = "PLAYER 2";
+
 let particles = [];
+
 let lightning = [];
+
 let projectiles = [];
+
 let impacts = [];
 
 let screenShake = 0;
 
-/*
-  IMPORTANT:
-  Each player owns their own energy.
-*/
+
+/* =========================================================
+   PLAYER DATA
+========================================================= */
 
 const p1 = {
+
   health:100,
+
   energy:0,
+
+  score:0,
+
   charging:false,
+
   shield:false,
+
   hands:[],
+
   color:"#20cfff"
 };
 
+
 const p2 = {
+
   health:100,
+
   energy:0,
+
+  score:0,
+
   charging:false,
+
   shield:false,
+
   hands:[],
+
   color:"#ff3d69"
 };
 
+
+/* =========================================================
+   CHARGE SPEED
+========================================================= */
+
 /*
-  Faster charging.
+   Faster charging.
 
-  Old:
-  0.75 per frame
-
-  New:
-  1.35 per frame
-
-  At ~30 FPS:
-  100 / (1.35*30)
-  ≈ 2.47 seconds
-
-  At ~40 FPS:
-  ≈ 1.85 seconds
-
-  So it feels significantly faster.
+   Around 2 seconds to full depending
+   on frame rate.
 */
 
 const CHARGE_SPEED = 1.35;
 
-/* ============================================================
+
+/* =========================================================
    RESIZE
-============================================================ */
+========================================================= */
 
 function resizeCanvas(){
 
@@ -732,10 +1323,14 @@ function resizeCanvas(){
     );
 
   canvas.width =
-    Math.floor(innerWidth*dpr);
+    Math.floor(
+      innerWidth*dpr
+    );
 
   canvas.height =
-    Math.floor(innerHeight*dpr);
+    Math.floor(
+      innerHeight*dpr
+    );
 
   canvas.style.width =
     innerWidth+"px";
@@ -760,9 +1355,10 @@ window.addEventListener(
 
 resizeCanvas();
 
-/* ============================================================
-   CAMERA COORDINATE MAPPING
-============================================================ */
+
+/* =========================================================
+   VIDEO -> SCREEN
+========================================================= */
 
 function videoPointToScreen(nx,ny){
 
@@ -775,8 +1371,12 @@ function videoPointToScreen(nx,ny){
   if(!vw || !vh){
 
     return {
-      x:nx*innerWidth,
-      y:ny*innerHeight
+
+      x:
+        nx*innerWidth,
+
+      y:
+        ny*innerHeight
     };
   }
 
@@ -811,14 +1411,19 @@ function videoPointToScreen(nx,ny){
     ny*vh*scale-cropY;
 
   return {
-    x:cw-rawX,
-    y:rawY
+
+    x:
+      cw-rawX,
+
+    y:
+      rawY
   };
 }
 
-/* ============================================================
-   LANDMARK HELPERS
-============================================================ */
+
+/* =========================================================
+   LANDMARKS
+========================================================= */
 
 function point(hand,index){
 
@@ -828,6 +1433,7 @@ function point(hand,index){
   );
 }
 
+
 function distance(a,b){
 
   return Math.hypot(
@@ -835,6 +1441,7 @@ function distance(a,b){
     a.y-b.y
   );
 }
+
 
 function palmCenter(hand){
 
@@ -849,20 +1456,28 @@ function palmCenter(hand){
   let x=0;
   let y=0;
 
-  for(const id of ids){
+  for(
+    const id of ids
+  ){
 
     const p =
       point(hand,id);
 
     x+=p.x;
+
     y+=p.y;
   }
 
   return {
-    x:x/ids.length,
-    y:y/ids.length
+
+    x:
+      x/ids.length,
+
+    y:
+      y/ids.length
   };
 }
+
 
 function handSize(hand){
 
@@ -881,9 +1496,10 @@ function handSize(hand){
   );
 }
 
-/* ============================================================
-   PALM
-============================================================ */
+
+/* =========================================================
+   OPEN PALM
+========================================================= */
 
 function isOpenPalm(hand){
 
@@ -906,17 +1522,33 @@ function isOpenPalm(hand){
 
   let extended=0;
 
-  for(let i=0;i<tips.length;i++){
+  for(
+    let i=0;
+    i<tips.length;
+    i++
+  ){
 
     const tip =
-      point(hand,tips[i]);
+      point(
+        hand,
+        tips[i]
+      );
 
     const base =
-      point(hand,bases[i]);
+      point(
+        hand,
+        bases[i]
+      );
 
     if(
-      distance(tip,wrist) >
-      distance(base,wrist)*1.18
+      distance(
+        tip,
+        wrist
+      ) >
+      distance(
+        base,
+        wrist
+      )*1.18
     ){
 
       extended++;
@@ -926,22 +1558,25 @@ function isOpenPalm(hand){
   return extended>=3;
 }
 
-/* ============================================================
-   SPLIT PLAYERS
-============================================================ */
+
+/* =========================================================
+   PLAYER SPLIT
+========================================================= */
 
 function splitPlayers(hands){
 
   const player1Hands=[];
   const player2Hands=[];
 
-  for(const hand of hands){
+  for(
+    const hand of hands
+  ){
 
     const center =
       palmCenter(hand);
 
     if(
-      center.x <
+      center.x<
       innerWidth/2
     ){
 
@@ -960,18 +1595,21 @@ function splitPlayers(hands){
     player2Hands.slice(0,2);
 }
 
-/* ============================================================
-   UPDATE ONE PLAYER
-============================================================ */
+
+/* =========================================================
+   PLAYER UPDATE
+========================================================= */
 
 function updatePlayer(player){
 
   /*
-    ONLY THIS PLAYER'S HANDS
-    affect THIS PLAYER'S energy.
+    Each player has completely
+    independent energy.
   */
 
-  if(player.hands.length>=2){
+  if(
+    player.hands.length>=2
+  ){
 
     const a =
       palmCenter(
@@ -989,7 +1627,9 @@ function updatePlayer(player){
     player.charging =
       d<230;
 
-    if(player.charging){
+    if(
+      player.charging
+    ){
 
       player.energy +=
         CHARGE_SPEED;
@@ -1006,8 +1646,9 @@ function updatePlayer(player){
     player.charging=false;
   }
 
+
   /*
-    Shield is independent.
+    Shield.
   */
 
   player.shield =
@@ -1017,17 +1658,20 @@ function updatePlayer(player){
     );
 }
 
-/* ============================================================
-   ATTACK STATE
-============================================================ */
+
+/* =========================================================
+   ATTACK
+========================================================= */
 
 let previousP1Charging=false;
+
 let previousP2Charging=false;
+
 
 function detectAttacks(){
 
   /*
-    PLAYER 1
+    P1
   */
 
   if(
@@ -1044,8 +1688,9 @@ function detectAttacks(){
     p1.energy=0;
   }
 
+
   /*
-    PLAYER 2
+    P2
   */
 
   if(
@@ -1062,6 +1707,7 @@ function detectAttacks(){
     p2.energy=0;
   }
 
+
   previousP1Charging =
     p1.charging;
 
@@ -1069,17 +1715,22 @@ function detectAttacks(){
     p2.charging;
 }
 
-/* ============================================================
+
+/* =========================================================
    PROJECTILE
-============================================================ */
+========================================================= */
 
 function fireProjectile(
   player,
   direction
 ){
 
-  if(!player.hands.length)
+  if(
+    !player.hands.length
+  ){
+
     return;
+  }
 
   const center =
     palmCenter(
@@ -1095,17 +1746,22 @@ function fireProjectile(
   projectiles.push({
 
     x:center.x,
+
     y:center.y,
 
     vx:
       direction*
-      (8+power*.06),
+      (
+        8+
+        power*.06
+      ),
 
     vy:0,
 
     power,
 
-    color:player.color,
+    color:
+      player.color,
 
     owner:
       player===p1
@@ -1127,14 +1783,16 @@ function fireProjectile(
   screenShake=5;
 }
 
-/* ============================================================
-   PROJECTILES
-============================================================ */
+
+/* =========================================================
+   PROJECTILE UPDATE
+========================================================= */
 
 function updateProjectiles(){
 
   for(
-    let i=projectiles.length-1;
+    let i=
+      projectiles.length-1;
     i>=0;
     i--
   ){
@@ -1143,9 +1801,11 @@ function updateProjectiles(){
       projectiles[i];
 
     p.x+=p.vx;
+
     p.y+=p.vy;
 
     p.life++;
+
 
     createParticle(
       p.x-p.vx*.5,
@@ -1154,9 +1814,15 @@ function updateProjectiles(){
       1
     );
 
+
+    /*
+      P1 hits P2
+    */
+
     if(
       p.owner===1 &&
-      p.x>innerWidth*.72
+      p.x>
+      innerWidth*.72
     ){
 
       damagePlayer(
@@ -1165,20 +1831,33 @@ function updateProjectiles(){
       );
 
       impacts.push({
+
         x:p.x,
+
         y:p.y,
+
         color:p.color,
+
         life:0
       });
 
-      projectiles.splice(i,1);
+      projectiles.splice(
+        i,
+        1
+      );
 
       continue;
     }
 
+
+    /*
+      P2 hits P1
+    */
+
     if(
       p.owner===2 &&
-      p.x<innerWidth*.28
+      p.x<
+      innerWidth*.28
     ){
 
       damagePlayer(
@@ -1187,42 +1866,67 @@ function updateProjectiles(){
       );
 
       impacts.push({
+
         x:p.x,
+
         y:p.y,
+
         color:p.color,
+
         life:0
       });
 
-      projectiles.splice(i,1);
+      projectiles.splice(
+        i,
+        1
+      );
 
       continue;
     }
 
+
     if(
-      p.life>p.maxLife ||
-      p.x<-100 ||
-      p.x>innerWidth+100
+      p.life>
+        p.maxLife ||
+
+      p.x<
+        -100 ||
+
+      p.x>
+        innerWidth+100
     ){
 
-      projectiles.splice(i,1);
+      projectiles.splice(
+        i,
+        1
+      );
     }
   }
 }
 
-/* ============================================================
+
+/* =========================================================
    DAMAGE
-============================================================ */
+========================================================= */
 
 function damagePlayer(
   player,
   amount
 ){
 
-  if(player.shield){
+  /*
+    Shield blocks most damage.
+  */
+
+  if(
+    player.shield
+  ){
 
     amount*=.15;
 
-    if(player.hands.length){
+    if(
+      player.hands.length
+    ){
 
       const c =
         palmCenter(
@@ -1238,7 +1942,9 @@ function damagePlayer(
     }
   }
 
+
   player.health-=amount;
+
 
   player.health =
     Math.max(
@@ -1246,17 +1952,26 @@ function damagePlayer(
       player.health
     );
 
+
   screenShake =
     Math.min(
       15,
       screenShake+8
     );
 
+
   updateHealthUI();
 
-  if(player.health<=0){
 
-    endGame(
+  /*
+    Round ends.
+  */
+
+  if(
+    player.health<=0
+  ){
+
+    finishRound(
       player===p1
         ? 2
         : 1
@@ -1264,9 +1979,328 @@ function damagePlayer(
   }
 }
 
-/* ============================================================
+
+/* =========================================================
+   FINISH ROUND
+========================================================= */
+
+function finishRound(
+  winnerPlayer
+){
+
+  if(
+    matchOver ||
+    !running
+  ){
+
+    return;
+  }
+
+  running=false;
+
+
+  /*
+    Add point.
+  */
+
+  if(
+    winnerPlayer===1
+  ){
+
+    p1.score++;
+
+  }else{
+
+    p2.score++;
+  }
+
+
+  updateScoreUI();
+
+
+  /*
+    Check FIRST TO 5.
+  */
+
+  if(
+    p1.score>=5 ||
+    p2.score>=5
+  ){
+
+    finishMatch(
+      winnerPlayer
+    );
+
+    return;
+  }
+
+
+  /*
+    Normal round win.
+  */
+
+  showRoundWinner(
+    winnerPlayer
+  );
+}
+
+
+/* =========================================================
+   ROUND WINNER
+========================================================= */
+
+function showRoundWinner(
+  winnerPlayer
+){
+
+  const winnerName =
+    winnerPlayer===1
+      ? player1Name
+      : player2Name;
+
+
+  roundMessageTitle.textContent =
+    winnerName.toUpperCase();
+
+
+  roundMessageSub.textContent =
+    "ROUND WINNER";
+
+
+  roundMessageTitle.style.color =
+    winnerPlayer===1
+      ? "#20cfff"
+      : "#ff3d69";
+
+
+  roundMessage.style.display =
+    "flex";
+
+
+  setTimeout(
+    ()=>{
+
+      roundMessage.style.display =
+        "none";
+
+      startNextRound();
+
+    },
+    1800
+  );
+}
+
+
+/* =========================================================
+   START NEXT ROUND
+========================================================= */
+
+function startNextRound(){
+
+  round++;
+
+
+  /*
+    Reset health and energy.
+  */
+
+  p1.health=100;
+  p2.health=100;
+
+  p1.energy=0;
+  p2.energy=0;
+
+  p1.hands=[];
+  p2.hands=[];
+
+  p1.charging=false;
+  p2.charging=false;
+
+  p1.shield=false;
+  p2.shield=false;
+
+
+  previousP1Charging=false;
+  previousP2Charging=false;
+
+
+  projectiles=[];
+  impacts=[];
+  lightning=[];
+
+
+  updateHealthUI();
+
+  updateScoreUI();
+
+  updateUI();
+
+
+  /*
+    Small round countdown.
+  */
+
+  showRoundStart();
+}
+
+
+/* =========================================================
+   ROUND START
+========================================================= */
+
+function showRoundStart(){
+
+  roundMessageTitle.textContent =
+    "ROUND "+
+    round;
+
+
+  roundMessageSub.textContent =
+    "GET READY";
+
+
+  roundMessageTitle.style.color =
+    "#ffffff";
+
+
+  roundMessage.style.display =
+    "flex";
+
+
+  setTimeout(
+    ()=>{
+
+      roundMessage.style.display =
+        "none";
+
+      running=true;
+
+      lastVideoTime=-1;
+
+      loop();
+
+    },
+    1200
+  );
+}
+
+
+/* =========================================================
+   FINAL MATCH
+========================================================= */
+
+function finishMatch(
+  winnerPlayer
+){
+
+  matchOver=true;
+
+  running=false;
+
+
+  const winnerName =
+    winnerPlayer===1
+      ? player1Name
+      : player2Name;
+
+
+  winnerTitle.textContent =
+    winnerName.toUpperCase()+
+    " WINS";
+
+
+  winnerSub.textContent =
+    "MATCH VICTORY";
+
+
+  finalScore.textContent =
+    p1.score+
+    "  -  "+
+    p2.score;
+
+
+  winnerTitle.style.color =
+    winnerPlayer===1
+      ? "#20cfff"
+      : "#ff3d69";
+
+
+  winnerTitle.style.textShadow =
+    winnerPlayer===1
+
+      ? "0 0 15px #fff,0 0 45px #20cfff"
+
+      : "0 0 15px #fff,0 0 45px #ff3d69";
+
+
+  winner.style.display =
+    "flex";
+
+
+  /*
+    Victory explosion.
+  */
+
+  for(
+    let i=0;
+    i<220;
+    i++
+  ){
+
+    createParticle(
+
+      innerWidth/2,
+
+      innerHeight/2,
+
+      winnerPlayer===1
+        ? "#20cfff"
+        : "#ff3d69",
+
+      1
+    );
+  }
+
+
+  /*
+    Animate victory particles.
+  */
+
+  victoryLoop();
+}
+
+
+function victoryLoop(){
+
+  if(
+    winner.style.display!=="flex"
+  ){
+
+    return;
+  }
+
+
+  updateParticles();
+
+  ctx.clearRect(
+    0,
+    0,
+    innerWidth,
+    innerHeight
+  );
+
+  drawParticles();
+
+
+  requestAnimationFrame(
+    victoryLoop
+  );
+}
+
+
+/* =========================================================
    PARTICLES
-============================================================ */
+========================================================= */
 
 function createParticle(
   x,
@@ -1275,11 +2309,16 @@ function createParticle(
   amount=1
 ){
 
-  for(let i=0;i<amount;i++){
+  for(
+    let i=0;
+    i<amount;
+    i++
+  ){
 
     particles.push({
 
       x,
+
       y,
 
       vx:
@@ -1303,6 +2342,7 @@ function createParticle(
   }
 }
 
+
 function createBurst(
   x,
   y,
@@ -1310,7 +2350,11 @@ function createBurst(
   amount
 ){
 
-  for(let i=0;i<amount;i++){
+  for(
+    let i=0;
+    i<amount;
+    i++
+  ){
 
     const angle =
       Math.random()*
@@ -1319,9 +2363,11 @@ function createBurst(
     const speed =
       Math.random()*8+2;
 
+
     particles.push({
 
       x,
+
       y,
 
       vx:
@@ -1345,10 +2391,12 @@ function createBurst(
   }
 }
 
+
 function updateParticles(){
 
   for(
-    let i=particles.length-1;
+    let i=
+      particles.length-1;
     i>=0;
     i--
   ){
@@ -1357,28 +2405,38 @@ function updateParticles(){
       particles[i];
 
     p.x+=p.vx;
+
     p.y+=p.vy;
 
     p.vx*=.96;
+
     p.vy*=.96;
 
     p.life++;
 
     p.alpha=
-      1-p.life/p.maxLife;
+      1-
+      p.life/
+      p.maxLife;
+
 
     if(
-      p.life>=p.maxLife
+      p.life>=
+      p.maxLife
     ){
 
-      particles.splice(i,1);
+      particles.splice(
+        i,
+        1
+      );
     }
   }
 }
 
-/* ============================================================
+
+/* =========================================================
    LIGHTNING
-============================================================ */
+========================================================= */
 
 function createLightning(
   x,
@@ -1388,83 +2446,115 @@ function createLightning(
 ){
 
   const points=[];
+
   const segments=12;
 
-  for(let i=0;i<=segments;i++){
 
-    const a =
-      i/segments*
-      Math.PI*2;
+  for(
+    let i=0;
+    i<=segments;
+    i++
+  ){
+
+    const angle =
+      i/
+      segments*
+      Math.PI*
+      2;
+
 
     const r =
       radius*
-      (.75+Math.random()*.35);
+      (
+        .75+
+        Math.random()*.35
+      );
+
 
     points.push({
 
       x:
-        x+Math.cos(a)*r,
+        x+
+        Math.cos(angle)*r,
 
       y:
-        y+Math.sin(a)*r
+        y+
+        Math.sin(angle)*r
     });
   }
+
 
   lightning.push({
 
     points,
+
     color,
+
     life:0,
+
     maxLife:12
   });
 }
 
+
 function updateLightning(){
 
   for(
-    let i=lightning.length-1;
+    let i=
+      lightning.length-1;
     i>=0;
     i--
   ){
 
     lightning[i].life++;
 
+
     if(
       lightning[i].life>
       lightning[i].maxLife
     ){
 
-      lightning.splice(i,1);
+      lightning.splice(
+        i,
+        1
+      );
     }
   }
 }
 
-/* ============================================================
-   IMPACTS
-============================================================ */
+
+/* =========================================================
+   IMPACT
+========================================================= */
 
 function updateImpacts(){
 
   for(
-    let i=impacts.length-1;
+    let i=
+      impacts.length-1;
     i>=0;
     i--
   ){
 
     impacts[i].life++;
 
+
     if(
       impacts[i].life>25
     ){
 
-      impacts.splice(i,1);
+      impacts.splice(
+        i,
+        1
+      );
     }
   }
 }
 
-/* ============================================================
+
+/* =========================================================
    GLOW
-============================================================ */
+========================================================= */
 
 function glowCircle(
   x,
@@ -1483,6 +2573,7 @@ function glowCircle(
       y,
       radius
     );
+
 
   gradient.addColorStop(
     0,
@@ -1504,9 +2595,11 @@ function glowCircle(
     "rgba(0,0,0,0)"
   );
 
+
   ctx.globalAlpha=alpha;
 
   ctx.fillStyle=gradient;
+
 
   ctx.beginPath();
 
@@ -1520,12 +2613,14 @@ function glowCircle(
 
   ctx.fill();
 
+
   ctx.globalAlpha=1;
 }
 
-/* ============================================================
+
+/* =========================================================
    AURA
-============================================================ */
+========================================================= */
 
 function drawAura(
   center,
@@ -1539,10 +2634,15 @@ function drawAura(
       performance.now()*.012
     )*5;
 
+
   const radius =
     size*
-    (.8+energy*.006)+
+    (
+      .8+
+      energy*.006
+    )+
     pulse;
+
 
   glowCircle(
     center.x,
@@ -1551,6 +2651,7 @@ function drawAura(
     color,
     .22
   );
+
 
   glowCircle(
     center.x,
@@ -1561,9 +2662,10 @@ function drawAura(
   );
 }
 
-/* ============================================================
+
+/* =========================================================
    HAND ENERGY
-============================================================ */
+========================================================= */
 
 function drawHandEnergy(
   hand,
@@ -1576,13 +2678,20 @@ function drawHandEnergy(
   const size =
     handSize(hand);
 
+
   const open =
     isOpenPalm(hand);
+
+
+  /*
+    Shield.
+  */
 
   if(open){
 
     const r =
       size*1.9;
+
 
     ctx.save();
 
@@ -1590,6 +2699,7 @@ function drawHandEnergy(
       c.x,
       c.y
     );
+
 
     const gradient =
       ctx.createRadialGradient(
@@ -1601,22 +2711,28 @@ function drawHandEnergy(
         r
       );
 
+
     gradient.addColorStop(
       0,
       "rgba(255,255,255,.22)"
     );
+
 
     gradient.addColorStop(
       .5,
       player.color+"33"
     );
 
+
     gradient.addColorStop(
       1,
       "rgba(0,0,0,0)"
     );
 
-    ctx.fillStyle=gradient;
+
+    ctx.fillStyle=
+      gradient;
+
 
     ctx.beginPath();
 
@@ -1630,6 +2746,7 @@ function drawHandEnergy(
 
     ctx.fill();
 
+
     ctx.strokeStyle=
       player.color;
 
@@ -1639,6 +2756,7 @@ function drawHandEnergy(
 
     ctx.shadowColor=
       player.color;
+
 
     ctx.beginPath();
 
@@ -1652,10 +2770,13 @@ function drawHandEnergy(
 
     ctx.stroke();
 
+
     ctx.restore();
+
 
     return;
   }
+
 
   glowCircle(
     c.x,
@@ -1666,9 +2787,10 @@ function drawHandEnergy(
   );
 }
 
-/* ============================================================
-   CHARGE
-============================================================ */
+
+/* =========================================================
+   CHARGE EFFECT
+========================================================= */
 
 function drawCharge(player){
 
@@ -1680,30 +2802,37 @@ function drawCharge(player){
     return;
   }
 
+
   const a =
     palmCenter(
       player.hands[0]
     );
+
 
   const b =
     palmCenter(
       player.hands[1]
     );
 
+
   const cx =
     (a.x+b.x)/2;
+
 
   const cy =
     (a.y+b.y)/2;
 
+
   const d =
     distance(a,b);
+
 
   const radius =
     Math.max(
       22,
       90-d*.18
     );
+
 
   drawAura(
     {
@@ -1715,6 +2844,7 @@ function drawCharge(player){
     player.energy
   );
 
+
   glowCircle(
     cx,
     cy,
@@ -1722,6 +2852,7 @@ function drawCharge(player){
     player.color,
     .65
   );
+
 
   glowCircle(
     cx,
@@ -1731,7 +2862,13 @@ function drawCharge(player){
     .85
   );
 
+
+  /*
+    Beam between hands.
+  */
+
   ctx.save();
+
 
   ctx.strokeStyle=
     player.color;
@@ -1744,6 +2881,7 @@ function drawCharge(player){
     player.color;
 
   ctx.globalAlpha=.75;
+
 
   ctx.beginPath();
 
@@ -1759,9 +2897,13 @@ function drawCharge(player){
 
   ctx.stroke();
 
+
   ctx.restore();
 
-  if(Math.random()<.25){
+
+  if(
+    Math.random()<.25
+  ){
 
     createLightning(
       cx,
@@ -1772,16 +2914,21 @@ function drawCharge(player){
   }
 }
 
-/* ============================================================
-   PROJECTILE DRAW
-============================================================ */
+
+/* =========================================================
+   DRAW PROJECTILES
+========================================================= */
 
 function drawProjectiles(){
 
-  for(const p of projectiles){
+  for(
+    const p of projectiles
+  ){
 
     const radius =
-      10+p.power*.08;
+      10+
+      p.power*.08;
+
 
     ctx.strokeStyle=
       p.color;
@@ -1789,12 +2936,15 @@ function drawProjectiles(){
     ctx.lineWidth=
       radius*1.4;
 
-    ctx.lineCap="round";
+    ctx.lineCap=
+      "round";
+
 
     ctx.beginPath();
 
     ctx.moveTo(
-      p.x-p.vx*10,
+      p.x-
+      p.vx*10,
       p.y
     );
 
@@ -1805,6 +2955,7 @@ function drawProjectiles(){
 
     ctx.stroke();
 
+
     glowCircle(
       p.x,
       p.y,
@@ -1812,6 +2963,7 @@ function drawProjectiles(){
       p.color,
       .65
     );
+
 
     glowCircle(
       p.x,
@@ -1823,19 +2975,23 @@ function drawProjectiles(){
   }
 }
 
-/* ============================================================
-   PARTICLE DRAW
-============================================================ */
+
+/* =========================================================
+   DRAW PARTICLES
+========================================================= */
 
 function drawParticles(){
 
-  for(const p of particles){
+  for(
+    const p of particles
+  ){
 
     ctx.globalAlpha=
       Math.max(
         0,
         p.alpha
       );
+
 
     ctx.fillStyle=
       p.color;
@@ -1844,6 +3000,7 @@ function drawParticles(){
 
     ctx.shadowColor=
       p.color;
+
 
     ctx.beginPath();
 
@@ -1858,24 +3015,34 @@ function drawParticles(){
     ctx.fill();
   }
 
+
   ctx.globalAlpha=1;
+
   ctx.shadowBlur=0;
 }
 
-/* ============================================================
-   LIGHTNING DRAW
-============================================================ */
+
+/* =========================================================
+   DRAW LIGHTNING
+========================================================= */
 
 function drawLightning(){
 
-  for(const l of lightning){
+  for(
+    const l of lightning
+  ){
 
     const alpha =
-      1-l.life/l.maxLife;
+      1-
+      l.life/
+      l.maxLife;
+
 
     ctx.save();
 
-    ctx.globalAlpha=alpha;
+
+    ctx.globalAlpha=
+      alpha;
 
     ctx.strokeStyle=
       l.color;
@@ -1887,7 +3054,9 @@ function drawLightning(){
 
     ctx.lineWidth=2;
 
+
     ctx.beginPath();
+
 
     l.points.forEach(
       (p,index)=>{
@@ -1909,32 +3078,41 @@ function drawLightning(){
       }
     );
 
+
     ctx.stroke();
 
     ctx.restore();
   }
 }
 
-/* ============================================================
-   IMPACT DRAW
-============================================================ */
+
+/* =========================================================
+   DRAW IMPACTS
+========================================================= */
 
 function drawImpacts(){
 
-  for(const i of impacts){
+  for(
+    const i of impacts
+  ){
 
     const progress =
       i.life/25;
 
+
     const radius =
       progress*110;
+
 
     const alpha =
       1-progress;
 
+
     ctx.save();
 
-    ctx.globalAlpha=alpha;
+
+    ctx.globalAlpha=
+      alpha;
 
     ctx.strokeStyle=
       i.color;
@@ -1945,6 +3123,7 @@ function drawImpacts(){
     ctx.shadowBlur=25;
 
     ctx.lineWidth=5;
+
 
     ctx.beginPath();
 
@@ -1958,13 +3137,15 @@ function drawImpacts(){
 
     ctx.stroke();
 
+
     ctx.restore();
   }
 }
 
-/* ============================================================
-   DRAW PLAYERS
-============================================================ */
+
+/* =========================================================
+   DRAW PLAYER
+========================================================= */
 
 function drawPlayer(player){
 
@@ -1978,38 +3159,88 @@ function drawPlayer(player){
     );
   }
 
-  if(player.charging){
+
+  if(
+    player.charging
+  ){
 
     drawCharge(player);
   }
 }
 
-/* ============================================================
-   UI UPDATE
-============================================================ */
+
+/* =========================================================
+   UPDATE HEALTH UI
+========================================================= */
+
+function updateHealthUI(){
+
+  p1HealthEl.style.width =
+    p1.health+
+    "%";
+
+  p2HealthEl.style.width =
+    p2.health+
+    "%";
+}
+
+
+/* =========================================================
+   UPDATE SCORE UI
+========================================================= */
+
+function updateScoreUI(){
+
+  p1ScoreEl.textContent =
+    p1.score;
+
+  p2ScoreEl.textContent =
+    p2.score;
+
+  roundText.textContent =
+    "ROUND "+
+    round;
+}
+
+
+/* =========================================================
+   UPDATE GAME UI
+========================================================= */
 
 function updateUI(){
 
   /*
-    IMPORTANT:
-    Two completely independent bars.
+    Independent energy.
   */
 
   p1EnergyEl.style.width =
-    p1.energy+"%";
+    p1.energy+
+    "%";
 
   p2EnergyEl.style.width =
-    p2.energy+"%";
+    p2.energy+
+    "%";
+
 
   p1EnergyText.textContent =
     "ENERGY "+
-    Math.round(p1.energy)+
+    Math.round(
+      p1.energy
+    )+
     "%";
+
 
   p2EnergyText.textContent =
     "ENERGY "+
-    Math.round(p2.energy)+
+    Math.round(
+      p2.energy
+    )+
     "%";
+
+
+  /*
+    Status.
+  */
 
   if(
     p1.charging &&
@@ -2019,15 +3250,21 @@ function updateUI(){
     statusEl.textContent =
       "BOTH PLAYERS CHARGING";
 
-  }else if(p1.charging){
+  }else if(
+    p1.charging
+  ){
 
     statusEl.textContent =
-      "PLAYER 1 CHARGING";
+      player1Name.toUpperCase()+
+      " CHARGING";
 
-  }else if(p2.charging){
+  }else if(
+    p2.charging
+  ){
 
     statusEl.textContent =
-      "PLAYER 2 CHARGING";
+      player2Name.toUpperCase()+
+      " CHARGING";
 
   }else if(
     p1.shield ||
@@ -2044,18 +3281,10 @@ function updateUI(){
   }
 }
 
-function updateHealthUI(){
 
-  p1HealthEl.style.width =
-    p1.health+"%";
-
-  p2HealthEl.style.width =
-    p2.health+"%";
-}
-
-/* ============================================================
-   MAIN DRAW
-============================================================ */
+/* =========================================================
+   DRAW
+========================================================= */
 
 function draw(){
 
@@ -2066,10 +3295,15 @@ function draw(){
     innerHeight
   );
 
+
   let shakeX=0;
+
   let shakeY=0;
 
-  if(screenShake>0){
+
+  if(
+    screenShake>0
+  ){
 
     shakeX=
       (Math.random()-.5)*
@@ -2079,20 +3313,30 @@ function draw(){
       (Math.random()-.5)*
       screenShake;
 
+
     screenShake*=.86;
 
-    if(screenShake<.2)
+
+    if(
+      screenShake<.2
+    ){
+
       screenShake=0;
+    }
   }
 
+
   ctx.save();
+
 
   ctx.translate(
     shakeX,
     shakeY
   );
 
+
   drawPlayer(p1);
+
   drawPlayer(p2);
 
   drawProjectiles();
@@ -2103,21 +3347,24 @@ function draw(){
 
   drawLightning();
 
+
   ctx.restore();
 }
 
-/* ============================================================
-   LOOP
-============================================================ */
+
+/* =========================================================
+   MAIN LOOP
+========================================================= */
 
 function loop(){
 
-  if(!running){
-
-    requestAnimationFrame(loop);
+  if(
+    !running
+  ){
 
     return;
   }
+
 
   if(
     video.readyState>=2 &&
@@ -2128,6 +3375,7 @@ function loop(){
     const now =
       performance.now();
 
+
     try{
 
       const result =
@@ -2135,6 +3383,7 @@ function loop(){
           video,
           now
         );
+
 
       if(
         result &&
@@ -2146,53 +3395,67 @@ function loop(){
         );
       }
 
+
       lastVideoTime=
         video.currentTime;
 
-    }catch(err){
+    }catch(error){
 
       console.warn(
         "Hand detection:",
-        err
+        error
       );
     }
   }
 
+
   /*
-    Both players update
-    independently every frame.
+    Both players update independently.
   */
 
   updatePlayer(p1);
+
   updatePlayer(p2);
+
 
   detectAttacks();
 
+
   updateProjectiles();
+
   updateParticles();
+
   updateLightning();
+
   updateImpacts();
+
 
   updateUI();
 
   draw();
 
-  requestAnimationFrame(loop);
+
+  requestAnimationFrame(
+    loop
+  );
 }
 
-/* ============================================================
+
+/* =========================================================
    HAND TRACKER
-============================================================ */
+========================================================= */
 
 async function createHandTracker(){
 
   loading.textContent=
     "LOADING HAND TRACKING...";
 
+
   const vision =
     await FilesetResolver.forVisionTasks(
       "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.22-rc.20250304/wasm"
     );
+
 
   handLandmarker =
     await HandLandmarker.createFromOptions(
@@ -2200,36 +3463,50 @@ async function createHandTracker(){
       {
 
         baseOptions:{
+
           modelAssetPath:
             "https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task"
         },
 
-        runningMode:"VIDEO",
 
-        numHands:4,
+        runningMode:
+          "VIDEO",
 
-        minHandDetectionConfidence:.55,
 
-        minHandPresenceConfidence:.55,
+        numHands:
+          4,
 
-        minTrackingConfidence:.55
+
+        minHandDetectionConfidence:
+          .55,
+
+
+        minHandPresenceConfidence:
+          .55,
+
+
+        minTrackingConfidence:
+          .55
       }
     );
+
 
   loading.textContent=
     "HAND TRACKING READY";
 }
 
-/* ============================================================
+
+/* =========================================================
    CAMERA
-============================================================ */
+========================================================= */
 
 async function startCamera(){
 
   loading.textContent=
     "REQUESTING CAMERA...";
 
-  stream=
+
+  stream =
     await navigator.mediaDevices.getUserMedia({
 
       video:{
@@ -2253,22 +3530,83 @@ async function startCamera(){
       audio:false
     });
 
+
   video.srcObject=
     stream;
 
+
   await video.play();
+
 
   statusEl.textContent=
     "CAMERA READY";
 }
 
-/* ============================================================
-   START
-============================================================ */
+
+/* =========================================================
+   START MATCH
+========================================================= */
 
 async function startGame(){
 
-  startButton.disabled=true;
+  /*
+    Read names.
+  */
+
+  player1Name =
+    p1NameInput.value.trim() ||
+    "PLAYER 1";
+
+
+  player2Name =
+    p2NameInput.value.trim() ||
+    "PLAYER 2";
+
+
+  /*
+    Update UI names.
+  */
+
+  player1NameEl.textContent =
+    player1Name;
+
+
+  player2NameEl.textContent =
+    player2Name;
+
+
+  /*
+    Reset match.
+  */
+
+  p1.score=0;
+
+  p2.score=0;
+
+  round=1;
+
+  matchOver=false;
+
+
+  p1.health=100;
+
+  p2.health=100;
+
+  p1.energy=0;
+
+  p2.energy=0;
+
+
+  updateHealthUI();
+
+  updateScoreUI();
+
+  updateUI();
+
+
+  startButton.disabled=
+    true;
+
 
   try{
 
@@ -2276,24 +3614,26 @@ async function startGame(){
 
     await startCamera();
 
+
     startScreen.style.display=
       "none";
 
-    running=true;
 
-    statusEl.textContent=
-      "BATTLE READY";
+    showRoundStart();
 
-    loop();
 
   }catch(error){
 
     console.error(error);
 
+
     loading.textContent=
       "CAMERA / MODEL ERROR";
 
-    startButton.disabled=false;
+
+    startButton.disabled=
+      false;
+
 
     alert(
       "Could not start the camera.\n\n"+
@@ -2302,105 +3642,93 @@ async function startGame(){
   }
 }
 
-startButton.addEventListener(
-  "click",
-  startGame
-);
 
-/* ============================================================
-   END GAME
-============================================================ */
-
-function endGame(playerNumber){
-
-  running=false;
-
-  winner.style.display=
-    "flex";
-
-  winnerTitle.textContent=
-    "PLAYER "+
-    playerNumber+
-    " WINS";
-
-  if(playerNumber===1){
-
-    winnerTitle.style.color=
-      "#20cfff";
-
-    winnerTitle.style.textShadow=
-      "0 0 15px #fff,0 0 45px #20cfff";
-
-  }else{
-
-    winnerTitle.style.color=
-      "#ff3d69";
-
-    winnerTitle.style.textShadow=
-      "0 0 15px #fff,0 0 45px #ff3d69";
-  }
-
-  for(let i=0;i<180;i++){
-
-    createParticle(
-      innerWidth/2,
-      innerHeight/2,
-      playerNumber===1
-        ? "#20cfff"
-        : "#ff3d69",
-      1
-    );
-  }
-}
-
-/* ============================================================
-   RESTART
-============================================================ */
+/* =========================================================
+   NEW MATCH
+========================================================= */
 
 restartButton.addEventListener(
   "click",
   ()=>{
 
-    p1.health=100;
-    p2.health=100;
-
-    p1.energy=0;
-    p2.energy=0;
-
-    p1.hands=[];
-    p2.hands=[];
-
-    p1.charging=false;
-    p2.charging=false;
-
-    p1.shield=false;
-    p2.shield=false;
-
-    projectiles=[];
-    particles=[];
-    lightning=[];
-    impacts=[];
-
-    previousP1Charging=false;
-    previousP2Charging=false;
-
-    updateHealthUI();
-    updateUI();
-
     winner.style.display=
       "none";
 
-    running=true;
 
-    lastVideoTime=-1;
+    particles=[];
 
-    loop();
+    lightning=[];
+
+    projectiles=[];
+
+    impacts=[];
+
+
+    p1.score=0;
+
+    p2.score=0;
+
+    round=1;
+
+    matchOver=false;
+
+
+    p1.health=100;
+
+    p2.health=100;
+
+    p1.energy=0;
+
+    p2.energy=0;
+
+
+    updateHealthUI();
+
+    updateScoreUI();
+
+    updateUI();
+
+
+    showRoundStart();
   }
 );
 
-/* ============================================================
+
+/* =========================================================
+   ENTER KEY
+========================================================= */
+
+p1NameInput.addEventListener(
+  "keydown",
+  event=>{
+
+    if(
+      event.key==="Enter"
+    ){
+
+      p2NameInput.focus();
+    }
+  }
+);
+
+
+p2NameInput.addEventListener(
+  "keydown",
+  event=>{
+
+    if(
+      event.key==="Enter"
+    ){
+
+      startButton.click();
+    }
+  }
+);
+
+
+/* =========================================================
    CLEANUP
-============================================================ */
+========================================================= */
 
 window.addEventListener(
   "beforeunload",
@@ -2411,17 +3739,22 @@ window.addEventListener(
       stream
         .getTracks()
         .forEach(
-          track=>track.stop()
+          track=>
+            track.stop()
         );
     }
   }
 );
 
-/* ============================================================
+
+/* =========================================================
    INITIAL
-============================================================ */
+========================================================= */
 
 updateHealthUI();
+
+updateScoreUI();
+
 updateUI();
 
 statusEl.textContent=
@@ -2431,6 +3764,8 @@ loading.textContent=
   "READY";
 
 </script>
+
+</div>
 
 </body>
 </html>
